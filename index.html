@@ -230,6 +230,7 @@
         <div class="kicker">WEDDING VENUE</div>
         <h2 id="venue-name" style="font-size:24px">Add your venue name</h2>
         <p class="map-address" id="venue-address">Add your full wedding venue address.</p>
+        <a class="gold-button" id="map-link" href="https://maps.google.com/" target="_blank" rel="noopener noreferrer">OPEN GOOGLE MAPS ↗</a>
         <div class="map-embed">
           <iframe id="map-embed-frame" title="Google Map showing the wedding venue" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3776.5165175634734!2d78.92467017497064!3d18.81968798233282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcd137d16059a9f%3A0xd8257c7b9cc67b66!2sSumangali%20Garden%27s%20A%2FC%20Function%20Hall!5e0!3m2!1sen!2sin!4v1793007235341!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
         </div>
@@ -247,7 +248,7 @@
       <div style="font-size:28px;color:#a96c25;margin:20px" aria-hidden="true">ॐ शुभमस्तु ॐ</div>
       <h2 style="color:#25452a">Raju &amp; Prathyusha</h2>
       <div class="kicker">30 · 10 · 2026</div>
-      <p style="margin-top:26px"><a href="#opening" class="subtle">Back to the beginning ↑</a></p>
+      <p style="margin-top:26px"><a href="#opening" id="back-to-beginning" class="subtle">Back to the beginning ↑</a></p>
     </footer>
   </section>
 </main>
@@ -418,6 +419,24 @@ const CONFIG = {
 
   scrollCue.addEventListener("click", scrollToNextSection);
   $("#explore-invitation").addEventListener("click", () => $("#family-section").scrollIntoView({ behavior: "smooth", block: "start" }));
+
+  // Return to the opening screen from the footer, even after the intro was hidden.
+  $("#back-to-beginning").addEventListener("click", (event) => {
+    event.preventDefault();
+    try { video.pause(); video.currentTime = 0; } catch (_) { /* no-op */ }
+    invitationShown = false;
+    invitation.classList.add("hidden");
+    opening.hidden = false;
+    opening.removeAttribute("aria-hidden");
+    $("#opening-card").style.opacity = "1";
+    $("#opening-card").style.pointerEvents = "auto";
+    openButton.disabled = false;
+    skipButton.classList.add("hidden");
+    $("#video-status").textContent = "TAP TO BEGIN THE TEMPLE REVEAL";
+    scrollProgressTrack.classList.add("hidden");
+    scrollCue.classList.add("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
   window.addEventListener("scroll", updateScrollProgress, { passive: true });
   window.addEventListener("resize", updateScrollProgress, { passive: true });
 
@@ -611,6 +630,7 @@ const CONFIG = {
   const candidateMapUrl = safeHttpsUrl(CONFIG.mapUrl);
   const mapHost = candidateMapUrl ? candidateMapUrl.hostname.toLowerCase() : "";
   const allowedMapHost = mapHost === "google.com" || mapHost.endsWith(".google.com") || mapHost === "maps.app.goo.gl" || mapHost === "goo.gl";
+  $("#map-link").href = candidateMapUrl && allowedMapHost ? candidateMapUrl.href : "https://maps.google.com/";
   /* Keep the supplied venue-specific Google Maps embed URL in the iframe. */
 
   function createPetals() {
