@@ -12,6 +12,8 @@ To change the post:
    instagramPostUrl: "https://www.instagram.com/p/DeJwS33E51p/"
 4. Commit and push the updated index.html. GitHub Pages will deploy the update.
 
-The Instagram embed script loads only after the visitor taps LOAD INSTAGRAM POST.
+The Instagram embed script loads automatically when the visitor scrolls near the Instagram section.
 The post must be public and permit embedding. If the in-page preview fails, the
-OPEN ON INSTAGRAM button remains available.
+VIEW / COMMENT ON INSTAGRAM link remains available.
+
+Background music: YouTube video k5dRZQ00Tkg starts after the visitor taps Open Invitation. Browser/YouTube playback policies can affect autoplay. A semi-transparent scroll cue replaces the former bottom buttons and disappears near the page bottom.

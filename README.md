@@ -12,7 +12,7 @@ Open `index.html` and find `const CONFIG` near the bottom.
 - `mapUrl`: paste the Google Maps share/directions URL.
 - `instagramPostUrl`: already configured to the supplied post `https://www.instagram.com/p/DeJwS33E51p/`. Change it only if you want another public post or Reel.
 
-The former local photo gallery has been replaced by an Instagram embed. It loads only when a guest presses **Load Instagram Post**. This avoids loading Instagram's third-party embed script until the guest chooses to view it. The post must be public and allow embedding. If Instagram blocks the embed, the **Open on Instagram** fallback remains available. Stories and private posts cannot be embedded.
+The former local photo gallery has been replaced by an Instagram embed. It loads automatically when the guest scrolls near the Instagram section. The post must be public and allow embedding. If Instagram blocks the embed, the **View / Comment on Instagram** fallback remains available. Stories and private posts cannot be embedded. The embed does not include an Instagram comments thread; visitors should open Instagram to comment. Instagram controls its cross-origin embed UI, so the site cannot forcibly hide individual controls inside that iframe.
 
 ## 2. Publish to GitHub Pages
 
@@ -36,7 +36,7 @@ The included `.nojekyll` file tells GitHub Pages to serve static files without J
 
 - Removed the photo slider and replaced it with a public-post Instagram embed flow.
 - Instagram URLs are validated against `instagram.com` and allowed public post types (`/p/`, `/reel/`, `/tv/`); arbitrary embed domains are not accepted.
-- The Instagram embed script is only loaded after a guest clicks to load the post.
+- The Instagram embed script loads automatically when the section approaches the viewport; this defers third-party loading until it is useful.
 - Uses `textContent` for configured venue strings rather than injecting them as HTML.
 - External links use `rel="noopener noreferrer"` and HTTPS URL validation for the map button.
 - Scratch canvas initializes only after the invitation is visible and samples progress less frequently to reduce repeated pixel-read work.
@@ -75,15 +75,24 @@ This is a static front-end site; it does not store personal data or use a backen
 ### Mobile test
 1. Open the published URL on your phone.
 2. Tap **Open Invitation**, confirm the video plays, then confirm the original invitation artwork appears.
-3. Scroll to **Moments on Instagram** and tap **Load Instagram Post**.
-4. If the embedded post doesn't render, tap **Open on Instagram**. Embedding requires a public post and can be affected by account settings or browser privacy controls.
+3. Scroll to **Moments on Instagram**; the post should load automatically.
+4. If the embedded post doesn't render, tap **View / Comment on Instagram**. Embedding requires a public post and can be affected by account settings or browser privacy controls.
 5. Test scratch-to-reveal, countdown, map, buttons, and links.
 
 ## 6. Mobile UI/UX updates
 - Comfortable 46–48px touch targets, adaptive button lettering, safe-area padding, responsive heading sizes, and smaller-screen spacing.
 - Instagram actions become a single column on phones; the embed is constrained to the screen width.
-- Instagram's third-party script only loads after the guest taps the load button.
+- Instagram's third-party script loads automatically when the section nears the viewport, not immediately at initial page load.
 - Opening video and original artwork remain bundled in `assets/` for reliable GitHub Pages delivery.
 
-## 7. Public-site privacy
+## 7. Wedding music and scrolling controls
+- The supplied MP3 is bundled locally as `assets/wedding-song.mp3`; no YouTube embed or external music host is required.
+- The site attempts to start the song when a guest taps **Open Invitation**. Browser autoplay rules vary, so the native audio controls are also available in the **Our Wedding Song** section.
+- Guests can play, pause, loop, and adjust the volume using the audio player.
+- A top progress bar and fixed **Top** / **Next Section** controls make the invitation easier to navigate on phones and desktop. The artwork section also contains an **Explore the Invitation** shortcut.
+
+## 8. Public-site privacy
 GitHub Pages content is publicly accessible on the internet. Only publish wedding photos, video, and details you are comfortable sharing publicly.
+
+
+Latest update: wedding music now uses the supplied local MP3 at `assets/wedding-song.mp3` instead of YouTube. The site attempts playback from the Open Invitation tap; if the browser blocks autoplay, guests can tap Play in the visible audio controls. A subtle scroll cue replaces the previous floating Top / Next Section / Music buttons.
