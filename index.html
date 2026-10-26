@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5e5c3">
+  <meta name="description" content="The wedding invitation of Vadloori Raju and Kancharla Prathyusha — 30 October 2026.">
+  <title>Raju &amp; Prathyusha | Wedding Invitation</title>
+  <link rel="preload" as="image" href="assets/temple-video-poster.jpg">
+  <link rel="preload" as="image" href="assets/main-wedding-artwork.webp">
+  <style>
+    :root{--gold:#b77a25;--gold-light:#f3d995;--ivory:#fff5df;--ink:#4c2b15;--wine:#7b1723;--forest:#21492d}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:#f6e8ca;scroll-padding-top:12px}
+    body{margin:0;background:#f6e8ca;color:var(--ink);font-family:Georgia,"Times New Roman",serif;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-wrap:anywhere}
+    button,a{font:inherit;-webkit-tap-highlight-color:transparent}
+    button{cursor:pointer;touch-action:manipulation}
+    a{color:inherit}
+    img,video,iframe{max-width:100%}
+    [hidden],.hidden{display:none!important}
+    button:disabled{cursor:not-allowed;opacity:.65}
+    #app{width:100%;max-width:900px;margin:0 auto;background:var(--ivory);overflow:hidden;box-shadow:0 0 50px #70461b24}
+    .section[id],footer[id]{scroll-margin-top:10px}
+    .gold-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;border:1px solid #ffe4a1;background:linear-gradient(135deg,#f9e3a6,#c38a36);color:#4a260e;padding:13px 18px;letter-spacing:clamp(.5px,.4vw,1.6px);font:700 11px/1.4 Arial,sans-serif;text-align:center;text-decoration:none;box-shadow:0 8px 28px #44230b45;transition:transform .25s,filter .25s;border-radius:2px;max-width:100%;white-space:normal}
+    .gold-button:hover{transform:translateY(-2px);filter:brightness(1.04)}
+    .gold-button:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #7c281c;outline-offset:3px}
+    .kicker{font:10px/1.9 Arial,sans-serif;letter-spacing:clamp(1px,.65vw,3px);text-transform:uppercase;color:#9a5c1b;overflow-wrap:anywhere}
+    .ornament{width:min(86%,440px);height:auto;display:block;margin:17px auto}
+    .rule{width:90px;border-top:1px solid #bd8739;margin:24px auto}
+    .section{position:relative;padding:50px 20px;text-align:center;background:#fff3d7;border-bottom:1px solid #cba45d70;isolation:isolate}
+    .section.framed{background-image:linear-gradient(#fff5e6d4,#fff5e6d4),url("assets/ivory-gold-frame.webp");background-size:cover;background-position:center;background-attachment:scroll}
+    .section h2{font-size:clamp(25px,5vw,34px);font-weight:normal;color:#8f4c18;margin:10px 0 16px}
+    .section p{font-size:15px;line-height:1.85}
+    .subtle{color:#8b5a2a}
+
+    /* Cinematic opening: the bundled MP4 is loaded only after a guest taps the button. */
+    #opening{position:relative;min-height:100vh;min-height:100svh;display:grid;place-items:center;overflow:hidden;background:#29170c;color:#fff1ce;padding: max(16px,env(safe-area-inset-top)) 0 max(18px,env(safe-area-inset-bottom))}
+    #door-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;background:#29170c;max-width:none}
+    #opening:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#1c100522 0%,#1b0d0638 55%,#130902ac 100%);pointer-events:none;z-index:1}
+    .opening-card{position:relative;z-index:2;width:min(92%,470px);padding:28px 18px;text-align:center;color:#fff1ce;text-shadow:0 2px 12px #1d0e04;transition:opacity .45s ease}
+    .opening-card .om{font-size:32px;color:#f4d68c;margin-bottom:14px}
+    .opening-card h1{font-size:clamp(30px,7vw,47px);font-weight:normal;color:#f4d68c;margin:12px 0;line-height:1.18}
+    .opening-card p{line-height:1.8;font-size:14px}
+    #video-status{font:10px Arial,sans-serif;letter-spacing:1px;color:#f6dfaa;margin-top:14px}
+    #skip-intro{position:absolute;z-index:5;bottom:20px;right:16px;border:1px solid #f7dba0a0;background:#25170cbb;color:#fff2d0;padding:10px 13px;font:10px Arial,sans-serif;letter-spacing:1px}
+    .video-plaque{position:absolute;z-index:3;bottom:7.2%;left:50%;transform:translateX(-50%);width:min(230px,54vw);padding:8px 6px;border:1px solid #e4c77c;background:linear-gradient(135deg,#4b2b13f5,#8a5a25f5,#4b2b13f5);color:#f9dfa0;font-size:12px;letter-spacing:2px;text-align:center;box-shadow:0 3px 16px #160b05aa;pointer-events:none}
+
+    /* Exact artwork provided by the couple. Text remains an image to preserve the lettering. */
+    #artwork-section{padding:0;background:#f6e7c4}
+    #hero-artwork{width:100%;height:auto;display:block}
+    #artwork-caption{padding:18px 18px 27px;background:linear-gradient(#fff4dd,#f5dfb6);text-align:center}
+    #artwork-caption p{margin:5px 0;line-height:1.8}
+
+    /* Scratch-to-reveal: canvas is initialized only after the invitation becomes visible. */
+    .scratch-card{width:min(100%,360px);height:190px;position:relative;margin:25px auto 14px;background:#fff4d8;border:1px solid #b88038;box-shadow:0 10px 28px #80511a16;overflow:hidden;touch-action:none;border-radius:3px}
+    .scratch-message{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#8c4b18}
+    .scratch-message small{font:10px Arial,sans-serif;letter-spacing:2px}
+    .scratch-message strong{font-size:30px;line-height:1.4;font-weight:normal;margin:8px}
+    #scratch-canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;display:block}
+    .scratch-help{font:10px Arial,sans-serif;letter-spacing:1px;color:#986022;line-height:1.8}
+
+    .countdown{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:25px auto}
+    .timebox{width:72px;padding:14px 4px;background:#fff8e8e8;border:1px solid #c49a51}
+    .time-number{font-size:27px;color:#8c4b18;font-variant-numeric:tabular-nums}
+    .time-unit{font:9px Arial,sans-serif;letter-spacing:1px;margin-top:7px;color:#79502a}
+
+    /* Instagram is opt-in loaded after a tap to keep the initial page fast and reduce third-party requests. */
+    .instagram-card{width:100%;max-width:600px;margin:24px auto 0;padding:clamp(12px,3.8vw,20px);background:#fff9ec;border:1px solid #c39a52;box-shadow:0 10px 28px #80511a16;min-width:0}
+    .instagram-mark{width:48px;height:48px;margin:0 auto 12px;border:1px solid #bb873b;border-radius:15px;display:grid;place-items:center;font:25px Arial,sans-serif;color:#8b4e1d;background:linear-gradient(135deg,#fff9eb,#f0d5a2)}
+    #instagram-embed-host{width:100%;max-width:540px;margin:20px auto 0;min-height:0;overflow:hidden;text-align:center;min-width:0}
+    #instagram-embed-host blockquote.instagram-media{margin:0 auto!important;max-width:100%!important;min-width:0!important;width:100%!important}
+    #instagram-embed-host iframe,#instagram-embed-host > iframe{display:block;width:100%!important;max-width:100%!important;min-width:0!important;margin:0 auto!important}
+    .instagram-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));justify-content:center;gap:10px;margin:18px auto 0}
+    .instagram-actions > *{min-width:0;width:100%;min-height:46px;padding:12px 10px;font-size:10px;line-height:1.45;letter-spacing:.6px}
+    .instagram-status{font:12px/1.8 Arial,sans-serif;color:#79552c;max-width:520px;margin:12px auto 0}
+    .secondary-button{border:1px solid #b88038;background:#fff7e8;color:#754719;box-shadow:none}
+
+    .map-card{width:100%;max-width:600px;margin:24px auto;padding:clamp(15px,4vw,26px);border:1px solid #c39a52;background:#fff7e7e8;min-width:0}
+    .map-icon{font-size:34px;color:#a56b26}
+    .map-address{font-size:14px;line-height:1.9}
+    .map-embed{width:100%;aspect-ratio:4/3;max-height:420px;overflow:hidden;border:1px solid #c39a52;margin:20px auto 0;background:#ead7ad}
+    .map-embed iframe{width:100%;height:100%;display:block;border:0}
+    .footer{background:linear-gradient(#f6e2b9,#e9c88f);padding:55px 20px;text-align:center}
+    .footer h2{color:#8f4c18;font-weight:normal}
+    .footer p{font-size:14px;line-height:1.9;max-width:620px;margin:14px auto}
+    .petal{position:absolute;top:-25px;color:#b92c3c;opacity:.5;pointer-events:none;animation:petalFall linear infinite;z-index:-1}
+    @keyframes petalFall{to{transform:translate3d(35px,110vh,0) rotate(400deg);opacity:.06}}
+    @media(max-width:600px){
+      #app{box-shadow:none}
+      .section{padding:clamp(32px,8vw,42px) clamp(13px,4vw,18px)}
+      .opening-card{width:min(94%,470px);padding:18px 12px}
+      .opening-card p{font-size:14px}
+      .timebox{width:calc(25% - 7px);min-width:58px;max-width:74px;padding:12px 3px}
+      .time-number{font-size:clamp(22px,6vw,27px)}
+      .time-unit{font-size:8px;letter-spacing:.7px}
+      .instagram-card{padding:12px 9px}
+      .instagram-actions{grid-template-columns:1fr}
+      .instagram-actions > *{width:100%;min-height:48px}
+      #instagram-embed-host{margin-top:14px}
+      .map-embed{aspect-ratio:1/1;max-height:360px}
+      .video-plaque{bottom:max(5%,env(safe-area-inset-bottom))}
+      .gold-button{min-height:48px}
+    }
+    @media(max-width:360px){
+      .kicker{font-size:9px;letter-spacing:.7px}
+      .opening-card h1{font-size:29px}
+      .countdown{gap:5px}
+      .instagram-card{padding:10px 7px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+<main id="app">
+  <section id="opening" aria-label="Open wedding invitation">
+    <video id="door-video" poster="assets/temple-video-poster.jpg" playsinline muted preload="none" aria-label="Temple doors opening video">
+      <source src="assets/temple-doors-opening.mp4" type="video/mp4">
+    </video>
+    <div class="opening-card" id="opening-card">
+      <div class="om" aria-hidden="true">॥ ॐ ॥</div>
+      <div class="kicker" style="color:#f4d68c">A SACRED BEGINNING AWAITS</div>
+      <h1>Raju <span style="font-size:.65em">&amp;</span><br>Prathyusha</h1>
+      <p>With the blessings of our families,<br>you are invited to witness our beautiful beginning.</p>
+      <button class="gold-button" id="open-invitation" type="button">✦ &nbsp; OPEN INVITATION &nbsp; ✦</button>
+      <div id="video-status" role="status" aria-live="polite">TAP TO BEGIN THE TEMPLE REVEAL</div>
+    </div>
+    <div class="video-plaque" aria-hidden="true">❧ &nbsp; शुभमस्तु &nbsp; ❧</div>
+    <button class="skip hidden" id="skip-intro" type="button">SKIP INTRO ↗</button>
+  </section>
+
+  <section id="invitation" class="hidden" aria-label="Wedding invitation content">
+    <section id="artwork-section">
+      <img id="hero-artwork" src="assets/main-wedding-artwork.webp" alt="Original golden temple wedding invitation for Raju and Prathyusha" decoding="async">
+      <div id="artwork-caption">
+        <div class="kicker">॥ SHUBHAMASTU ॥</div>
+        <p>Two hearts, two families, one beautiful beginning.</p>
+        <img class="ornament" src="assets/gold-lotus-divider.webp" alt="" aria-hidden="true" loading="lazy">
+        <p class="subtle">Please scroll to explore our wedding invitation</p>
+        <div style="font-size:22px;color:#a96c25" aria-hidden="true">⌄</div>
+      </div>
+    </section>
+
+    <section class="section framed" id="family-section">
+      <div class="kicker">WITH THE BLESSINGS OF OUR FAMILIES</div>
+      <h2>Two Families · One Forever</h2>
+      <img class="ornament" src="assets/gold-lotus-divider.webp" alt="" aria-hidden="true" loading="lazy">
+      <p>With immense joy and the blessings of our elders, we invite you to celebrate the wedding of</p>
+      <h2 style="font-size:clamp(34px,7vw,48px);color:#21492d;margin:14px 0">Vadloori Raju</h2>
+      <p style="font-style:italic;color:#a56b26;font-size:22px;margin:0">with</p>
+      <h2 style="font-size:clamp(34px,7vw,48px);color:#7d2028;margin:10px 0">Kancharla Prathyusha</h2>
+      <div class="rule"></div>
+      <p><strong>Groom</strong><br>Son of Vadloori Chandramouli &amp; Latha</p>
+      <p><strong>Bride</strong><br>Daughter of Kancharla Anandam &amp; Ganga Jamuna</p>
+      <p class="subtle">Your presence and blessings will make our celebration complete.</p>
+    </section>
+
+    <section class="section" id="date-section">
+      <div class="kicker">A DATE TO REMEMBER</div>
+      <h2>Scratch to Reveal</h2>
+      <p>Reveal the day we begin our forever together.</p>
+      <div class="scratch-card" id="scratch-card">
+        <div class="scratch-message">
+          <small>MARK YOUR CALENDAR</small>
+          <strong>30 OCTOBER<br>2026</strong>
+          <small>FRIDAY · SAVE THE DATE</small>
+        </div>
+        <canvas id="scratch-canvas" aria-label="Scratch the gold surface to reveal the wedding date"></canvas>
+      </div>
+      <div class="scratch-help" id="scratch-help" aria-live="polite">✦ RUB THE GOLD SURFACE WITH YOUR FINGER OR MOUSE ✦</div>
+    </section>
+
+    <section class="section framed" id="countdown-section">
+      <div class="kicker">THE JOURNEY TO FOREVER</div>
+      <h2>Counting Every Moment</h2>
+      <p>Until we begin our forever together</p>
+      <div class="countdown" aria-live="polite" aria-label="Countdown to the wedding">
+        <div class="timebox"><div class="time-number" id="days">--</div><div class="time-unit">DAYS</div></div>
+        <div class="timebox"><div class="time-number" id="hours">--</div><div class="time-unit">HOURS</div></div>
+        <div class="timebox"><div class="time-number" id="minutes">--</div><div class="time-unit">MINUTES</div></div>
+        <div class="timebox"><div class="time-number" id="seconds">--</div><div class="time-unit">SECONDS</div></div>
+      </div>
+      <p id="countdown-note" class="subtle">Countdown calculated against the wedding time in IST.</p>
+    </section>
+
+    <!-- Instagram replaces the former local photo gallery. Set CONFIG.instagramPostUrl below. -->
+    <section class="section" id="instagram-section">
+      <div class="kicker">A LITTLE MORE OF OUR STORY</div>
+      <h2>Moments on Instagram</h2>
+      <img class="ornament" src="assets/gold-lotus-divider.webp" alt="" aria-hidden="true" loading="lazy">
+      <p>Enjoy a favourite moment from our Instagram.</p>
+      <div class="instagram-card">
+        <div class="instagram-mark" aria-hidden="true">◎</div>
+        <p id="instagram-intro" class="subtle">Load our Instagram post to view it here.</p>
+        <div id="instagram-embed-host"></div>
+        <div class="instagram-actions">
+          <button class="gold-button" id="load-instagram" type="button">LOAD INSTAGRAM POST</button>
+          <a class="gold-button secondary-button" id="open-instagram" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">OPEN ON INSTAGRAM ↗</a>
+        </div>
+        <p class="instagram-status" id="instagram-status" role="status" aria-live="polite">For the embed to work, use a public Instagram post or Reel with embeds enabled. The Instagram link remains available if its preview is blocked.</p>
+      </div>
+    </section>
+
+    <section class="section framed" id="venue-section">
+      <div class="kicker">WE WOULD LOVE TO SEE YOU</div>
+      <h2>Join Us for the Celebration</h2>
+      <div class="map-card">
+        <div class="map-icon" aria-hidden="true">⌖</div>
+        <div class="kicker">WEDDING VENUE</div>
+        <h2 id="venue-name" style="font-size:24px">Add your venue name</h2>
+        <p class="map-address" id="venue-address">Add your full wedding venue address.</p>
+        <a class="gold-button" id="map-link" href="https://maps.google.com/" target="_blank" rel="noopener noreferrer">OPEN GOOGLE MAPS ↗</a>
+        <div class="map-embed">
+          <iframe id="map-embed-frame" title="Google Map showing the wedding venue" src="https://maps.google.com/maps?q=Hyderabad%2C%20Telangana&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="kicker">TO OUR DEAR FAMILY &amp; FRIENDS</div>
+      <h2>Dear Guests,</h2>
+      <p>Your love, presence, and blessings mean the world to us. As we begin this beautiful new chapter, we would be honoured to have you by our side.</p>
+      <p>Come share our happiness, bless our union, and make memories with us that last a lifetime.</p>
+      <img class="ornament" src="assets/gold-lotus-divider.webp" alt="" aria-hidden="true" loading="lazy">
+      <h2>Thank You</h2>
+      <p>Thank you for being part of our story. We look forward to celebrating this special milestone and seeking your blessings.</p>
+      <div style="font-size:28px;color:#a96c25;margin:20px" aria-hidden="true">ॐ शुभमस्तु ॐ</div>
+      <h2 style="color:#25452a">Raju &amp; Prathyusha</h2>
+      <div class="kicker">30 · 10 · 2026</div>
+      <p style="margin-top:26px"><a href="#opening" class="subtle">Back to the beginning ↑</a></p>
+    </footer>
+  </section>
+</main>
+
+<script>
+"use strict";
+
+/* ========================================================
+   EDIT THESE SETTINGS BEFORE PUBLISHING
+   - Instagram URL must be a PUBLIC post or Reel URL.
+   - Set the wedding ceremony time in IST with +05:30.
+   ======================================================== */
+const CONFIG = {
+  weddingDate: "2026-10-30T00:00:00+05:30", // Replace 00:00:00 with the actual muhurtham time.
+  venueName: "YOUR WEDDING VENUE",
+  venueAddress: "YOUR FULL VENUE ADDRESS, TELANGANA",
+  mapQuery: "YOUR WEDDING VENUE, TELANGANA",
+  mapUrl: "https://maps.google.com/?q=YOUR+WEDDING+VENUE",
+  instagramPostUrl: "https://www.instagram.com/p/DeJwS33E51p/" // Public post URL supplied for this invitation.
+};
+
+(() => {
+  const $ = (selector) => document.querySelector(selector);
+  const opening = $("#opening");
+  const invitation = $("#invitation");
+  const video = $("#door-video");
+  const openButton = $("#open-invitation");
+  const skipButton = $("#skip-intro");
+  let invitationShown = false;
+  let countdownTimer = null;
+  let scratchInitialized = false;
+  let instagramScriptPromise = null;
+  let instagramLoaded = false;
+
+  function safeHttpsUrl(value) {
+    try {
+      const url = new URL(value);
+      return url.protocol === "https:" ? url : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function normalizeInstagramPermalink(value) {
+    try {
+      const url = new URL(value);
+      if (!/^((www|m)\.)?instagram\.com$/i.test(url.hostname)) return null;
+      const match = url.pathname.match(/^\/(p|reel|tv)\/([A-Za-z0-9_-]+)\/?$/i);
+      if (!match) return null;
+      const kind = match[1].toLowerCase();
+      const code = match[2];
+      return `https://www.instagram.com/${kind}/${code}/`;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function showInvitation() {
+    if (invitationShown) return;
+    invitationShown = true;
+    try { video.pause(); } catch (_) { /* no-op */ }
+    opening.hidden = true;
+    opening.setAttribute("aria-hidden", "true");
+    invitation.classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "auto" });
+    initScratchWhenVisible();
+    startCountdown();
+    createPetals();
+  }
+
+  function playIntro() {
+    openButton.disabled = true;
+    skipButton.classList.remove("hidden");
+    $("#video-status").textContent = "PLEASE ENJOY THE TEMPLE REVEAL";
+    video.currentTime = 0;
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.then === "function") {
+      playPromise.then(() => {
+        $("#opening-card").style.opacity = "0";
+        $("#opening-card").style.pointerEvents = "none";
+      }).catch(() => {
+        $("#video-status").textContent = "Video could not start. Opening invitation…";
+        window.setTimeout(showInvitation, 700);
+      });
+    } else {
+      $("#opening-card").style.opacity = "0";
+    }
+  }
+
+  openButton.addEventListener("click", playIntro);
+  skipButton.addEventListener("click", showInvitation);
+  video.addEventListener("ended", showInvitation);
+  video.addEventListener("error", () => {
+    if (!invitationShown) {
+      $("#video-status").textContent = "Video unavailable. Continue to the invitation.";
+      skipButton.classList.remove("hidden");
+      openButton.disabled = false;
+    }
+  });
+
+  /* Countdown parses the explicit +05:30 offset and therefore works worldwide. */
+  function startCountdown() {
+    if (countdownTimer) window.clearInterval(countdownTimer);
+    const target = new Date(CONFIG.weddingDate).getTime();
+    const note = $("#countdown-note");
+    if (!Number.isFinite(target)) {
+      note.textContent = "Please set a valid wedding date and time in CONFIG.";
+      return;
+    }
+    function update() {
+      const diff = target - Date.now();
+      if (diff <= 0) {
+        ["days", "hours", "minutes", "seconds"].forEach(id => $("#" + id).textContent = "00");
+        note.textContent = "Our special day has arrived! Let the celebrations begin.";
+        window.clearInterval(countdownTimer);
+        return;
+      }
+      $("#days").textContent = String(Math.floor(diff / 86400000));
+      $("#hours").textContent = String(Math.floor(diff % 86400000 / 3600000)).padStart(2, "0");
+      $("#minutes").textContent = String(Math.floor(diff % 3600000 / 60000)).padStart(2, "0");
+      $("#seconds").textContent = String(Math.floor(diff % 60000 / 1000)).padStart(2, "0");
+    }
+    update();
+    countdownTimer = window.setInterval(update, 1000);
+  }
+
+  /* Scratch layer starts only after its page is visible, avoiding a blank canvas. */
+  function initScratchWhenVisible() {
+    if (scratchInitialized) return;
+    scratchInitialized = true;
+    const canvas = $("#scratch-canvas");
+    const card = $("#scratch-card");
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    let drawing = false;
+    let revealed = false;
+    let moveTicks = 0;
+
+    function paint() {
+      const rect = card.getBoundingClientRect();
+      if (rect.width < 20 || rect.height < 20) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+      gradient.addColorStop(0, "#f3d995");
+      gradient.addColorStop(.48, "#b67a2b");
+      gradient.addColorStop(1, "#e8c77e");
+      ctx.globalCompositeOperation = "source-over";
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, rect.width, rect.height);
+      ctx.strokeStyle = "#fff0c5";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(8, 8, rect.width - 16, rect.height - 16);
+      ctx.fillStyle = "#623914";
+      ctx.textAlign = "center";
+      ctx.font = "bold 12px Arial";
+      ctx.fillText("SCRATCH TO REVEAL", rect.width / 2, rect.height / 2);
+      ctx.globalCompositeOperation = "destination-out";
+    }
+
+    function reveal() {
+      if (revealed) return;
+      revealed = true;
+      canvas.style.transition = "opacity .65s ease";
+      canvas.style.opacity = "0";
+      $("#scratch-help").textContent = "✦ OUR WEDDING DAY · 30 OCTOBER 2026 ✦";
+      window.setTimeout(() => { canvas.hidden = true; }, 700);
+    }
+
+    function erase(event) {
+      if (!drawing || revealed) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.beginPath();
+      ctx.arc(event.clientX - rect.left, event.clientY - rect.top, 24, 0, Math.PI * 2);
+      ctx.fill();
+      moveTicks++;
+      if (moveTicks % 5 !== 0) return;
+      const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      let clear = 0;
+      let samples = 0;
+      for (let i = 3; i < pixels.length; i += 64) {
+        samples++;
+        if (pixels[i] < 80) clear++;
+      }
+      if (samples && clear / samples > .34) reveal();
+    }
+
+    paint();
+    canvas.addEventListener("pointerdown", event => {
+      if (revealed) return;
+      drawing = true;
+      if (typeof canvas.setPointerCapture === "function") canvas.setPointerCapture(event.pointerId);
+      erase(event);
+    });
+    canvas.addEventListener("pointermove", erase);
+    ["pointerup", "pointercancel", "lostpointercapture"].forEach(type => {
+      canvas.addEventListener(type, () => { drawing = false; });
+    });
+    // Don't repaint on resize: repainting would reset a partly scratched card.
+    // CSS keeps the canvas responsive without reinitializing its pixel layer.
+  }
+
+  /* Instagram: only accept a real public post/Reel URL on instagram.com. */
+  const permalink = normalizeInstagramPermalink(CONFIG.instagramPostUrl);
+  const instagramLoadButton = $("#load-instagram");
+  const instagramOpenLink = $("#open-instagram");
+  const instagramIntro = $("#instagram-intro");
+  const instagramStatus = $("#instagram-status");
+
+  if (permalink) {
+    instagramOpenLink.href = permalink;
+    instagramLoadButton.disabled = false;
+    instagramIntro.textContent = "Tap below to load the public Instagram post.";
+  } else {
+    instagramLoadButton.disabled = true;
+    instagramLoadButton.textContent = "ADD INSTAGRAM URL IN CONFIG";
+    instagramOpenLink.href = "https://www.instagram.com/";
+    instagramIntro.textContent = "Add the link to your public Instagram post or Reel in the CONFIG section before publishing.";
+  }
+
+  function loadInstagramScript() {
+    if (window.instgrm && window.instgrm.Embeds) return Promise.resolve();
+    if (instagramScriptPromise) return instagramScriptPromise;
+    instagramScriptPromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://www.instagram.com/embed.js";
+      script.async = true;
+      script.dataset.instagramEmbedScript = "true";
+      script.onload = () => resolve();
+      script.onerror = () => {
+        script.remove();
+        instagramScriptPromise = null; // Allow the guest to retry if the network request failed.
+        reject(new Error("Instagram embed script failed to load"));
+      };
+      document.head.appendChild(script);
+    });
+    return instagramScriptPromise;
+  }
+
+  instagramLoadButton.addEventListener("click", async () => {
+    if (!permalink || instagramLoaded) return;
+    instagramLoadButton.disabled = true;
+    instagramLoadButton.textContent = "LOADING INSTAGRAM…";
+    instagramStatus.textContent = "Connecting to Instagram. The post may take a few seconds to render.";
+
+    const blockquote = document.createElement("blockquote");
+    blockquote.className = "instagram-media";
+    blockquote.setAttribute("data-instgrm-permalink", permalink);
+    blockquote.setAttribute("data-instgrm-version", "14");
+    blockquote.setAttribute("data-instgrm-captioned", "");
+    blockquote.style.cssText = "background:#fff;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,.35),0 1px 10px 0 rgba(0,0,0,.12);margin:0 auto;max-width:540px;min-width:0;padding:0;width:100%;";
+    const fallbackAnchor = document.createElement("a");
+    fallbackAnchor.href = permalink;
+    fallbackAnchor.target = "_blank";
+    fallbackAnchor.rel = "noopener noreferrer";
+    fallbackAnchor.textContent = "View this post on Instagram";
+    fallbackAnchor.style.cssText = "display:block;padding:28px 10px;color:#8c4b18;text-decoration:none;font:14px Arial,sans-serif;";
+    blockquote.appendChild(fallbackAnchor);
+    $("#instagram-embed-host").replaceChildren(blockquote);
+
+    try {
+      await loadInstagramScript();
+      if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
+      instagramLoaded = true;
+      instagramLoadButton.textContent = "INSTAGRAM POST LOADED";
+      instagramStatus.textContent = "If the preview does not appear, use OPEN ON INSTAGRAM. The post must be public and allow embeds.";
+    } catch (_) {
+      instagramLoadButton.disabled = false;
+      instagramLoadButton.textContent = "RETRY INSTAGRAM POST";
+      instagramStatus.textContent = "Instagram could not load the embed here. Use OPEN ON INSTAGRAM to view the post directly.";
+    }
+  });
+
+  /* Map: visible text uses textContent; map query is URI-encoded and links are HTTPS. */
+  $("#venue-name").textContent = CONFIG.venueName;
+  $("#venue-address").textContent = CONFIG.venueAddress;
+  const candidateMapUrl = safeHttpsUrl(CONFIG.mapUrl);
+  const mapHost = candidateMapUrl ? candidateMapUrl.hostname.toLowerCase() : "";
+  const allowedMapHost = mapHost === "google.com" || mapHost.endsWith(".google.com") || mapHost === "maps.app.goo.gl" || mapHost === "goo.gl";
+  $("#map-link").href = candidateMapUrl && allowedMapHost ? candidateMapUrl.href : "https://maps.google.com/";
+  const query = encodeURIComponent(CONFIG.mapQuery || CONFIG.venueAddress || CONFIG.venueName);
+  $("#map-embed-frame").src = "https://maps.google.com/maps?q=" + query + "&output=embed";
+
+  function createPetals() {
+    const host = $("#invitation");
+    if (host.dataset.petalsCreated === "true") return;
+    host.dataset.petalsCreated = "true";
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < 10; i++) {
+      const petal = document.createElement("span");
+      petal.className = "petal";
+      petal.textContent = i % 2 ? "✿" : "❀";
+      petal.setAttribute("aria-hidden", "true");
+      petal.style.left = (Math.random() * 96) + "%";
+      petal.style.animationDelay = (Math.random() * 8) + "s";
+      petal.style.animationDuration = (10 + Math.random() * 8) + "s";
+      petal.style.fontSize = (10 + Math.random() * 9) + "px";
+      fragment.appendChild(petal);
+    }
+    host.appendChild(fragment);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+INSTAGRAM POST CONFIGURED
+
+The invitation is configured with this canonical Instagram post URL:
+https://www.instagram.com/p/DeJwS33E51p/
+
+The tracking parameter from the shared URL has been removed; it is not needed for the embed.
+
+To change the post:
+1. Open index.html.
+2. Find CONFIG near the bottom.
+3. Set:
+   instagramPostUrl: "https://www.instagram.com/p/DeJwS33E51p/"
+4. Commit and push the updated index.html. GitHub Pages will deploy the update.
+
+The Instagram embed script loads only after the visitor taps LOAD INSTAGRAM POST.
+The post must be public and permit embedding. If the in-page preview fails, the
+OPEN ON INSTAGRAM button remains available.
