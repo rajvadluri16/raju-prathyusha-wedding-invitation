@@ -190,13 +190,12 @@
       <p>Enjoy a favourite moment from our Instagram.</p>
       <div class="instagram-card">
         <div class="instagram-mark" aria-hidden="true">◎</div>
-        <p id="instagram-intro" class="subtle">Load our Instagram post to view it here.</p>
+        <p id="instagram-intro" class="subtle">Our Instagram moment will load here automatically.</p>
         <div id="instagram-embed-host"></div>
         <div class="instagram-actions">
-          <button class="gold-button" id="load-instagram" type="button">LOAD INSTAGRAM POST</button>
-          <a class="gold-button secondary-button" id="open-instagram" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">OPEN ON INSTAGRAM ↗</a>
+          <a class="gold-button secondary-button" id="open-instagram" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">VIEW / COMMENT ON INSTAGRAM ↗</a>
         </div>
-        <p class="instagram-status" id="instagram-status" role="status" aria-live="polite">For the embed to work, use a public Instagram post or Reel with embeds enabled. The Instagram link remains available if its preview is blocked.</p>
+        <p class="instagram-status" id="instagram-status" role="status" aria-live="polite">The public post loads automatically. Comments and conversations should be continued on Instagram.</p>
       </div>
     </section>
 
@@ -210,7 +209,7 @@
         <p class="map-address" id="venue-address">Add your full wedding venue address.</p>
         <a class="gold-button" id="map-link" href="https://maps.google.com/" target="_blank" rel="noopener noreferrer">OPEN GOOGLE MAPS ↗</a>
         <div class="map-embed">
-          <iframe id="map-embed-frame" title="Google Map showing the wedding venue" src="https://maps.google.com/maps?q=Hyderabad%2C%20Telangana&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          <iframe id="map-embed-frame" title="Google Map showing the wedding venue" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3776.5165175634734!2d78.92467017497064!3d18.81968798233282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcd137d16059a9f%3A0xd8257c7b9cc67b66!2sSumangali%20Garden%27s%20A%2FC%20Function%20Hall!5e0!3m2!1sen!2sin!4v1793007235341!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
         </div>
       </div>
     </section>
@@ -241,10 +240,10 @@
    ======================================================== */
 const CONFIG = {
   weddingDate: "2026-10-30T00:00:00+05:30", // Replace 00:00:00 with the actual muhurtham time.
-  venueName: "YOUR WEDDING VENUE",
-  venueAddress: "YOUR FULL VENUE ADDRESS, TELANGANA",
-  mapQuery: "YOUR WEDDING VENUE, TELANGANA",
-  mapUrl: "https://maps.google.com/?q=YOUR+WEDDING+VENUE",
+  venueName: "Sumangali Garden's A/C Function Hall",
+  venueAddress: "Sumangali Garden's A/C Function Hall, Jagtial, Telangana",
+  mapQuery: "Sumangali Garden's A/C Function Hall",
+  mapUrl: "https://www.google.com/maps/search/?api=1&query=Sumangali%20Garden%27s%20A%2FC%20Function%20Hall",
   instagramPostUrl: "https://www.instagram.com/p/DeJwS33E51p/" // Public post URL supplied for this invitation.
 };
 
@@ -430,22 +429,20 @@ const CONFIG = {
     // CSS keeps the canvas responsive without reinitializing its pixel layer.
   }
 
-  /* Instagram: only accept a real public post/Reel URL on instagram.com. */
+  /* Instagram: automatically load the public post when the section approaches view. */
   const permalink = normalizeInstagramPermalink(CONFIG.instagramPostUrl);
-  const instagramLoadButton = $("#load-instagram");
   const instagramOpenLink = $("#open-instagram");
   const instagramIntro = $("#instagram-intro");
   const instagramStatus = $("#instagram-status");
+  const instagramHost = $("#instagram-embed-host");
 
   if (permalink) {
     instagramOpenLink.href = permalink;
-    instagramLoadButton.disabled = false;
-    instagramIntro.textContent = "Tap below to load the public Instagram post.";
+    instagramIntro.textContent = "Loading our public Instagram post…";
   } else {
-    instagramLoadButton.disabled = true;
-    instagramLoadButton.textContent = "ADD INSTAGRAM URL IN CONFIG";
     instagramOpenLink.href = "https://www.instagram.com/";
-    instagramIntro.textContent = "Add the link to your public Instagram post or Reel in the CONFIG section before publishing.";
+    instagramIntro.textContent = "The Instagram post link needs to be configured before publishing.";
+    instagramStatus.textContent = "Use the Instagram link below to open Instagram.";
   }
 
   function loadInstagramScript() {
@@ -459,7 +456,7 @@ const CONFIG = {
       script.onload = () => resolve();
       script.onerror = () => {
         script.remove();
-        instagramScriptPromise = null; // Allow the guest to retry if the network request failed.
+        instagramScriptPromise = null;
         reject(new Error("Instagram embed script failed to load"));
       };
       document.head.appendChild(script);
@@ -467,17 +464,15 @@ const CONFIG = {
     return instagramScriptPromise;
   }
 
-  instagramLoadButton.addEventListener("click", async () => {
+  async function loadInstagramPost() {
     if (!permalink || instagramLoaded) return;
-    instagramLoadButton.disabled = true;
-    instagramLoadButton.textContent = "LOADING INSTAGRAM…";
-    instagramStatus.textContent = "Connecting to Instagram. The post may take a few seconds to render.";
-
+    instagramLoaded = true;
     const blockquote = document.createElement("blockquote");
     blockquote.className = "instagram-media";
     blockquote.setAttribute("data-instgrm-permalink", permalink);
     blockquote.setAttribute("data-instgrm-version", "14");
-    blockquote.setAttribute("data-instgrm-captioned", "");
+    /* Intentionally omit data-instgrm-captioned to keep the embed compact. Instagram's
+       official embed does not provide a supported switch to show/hide comments individually. */
     blockquote.style.cssText = "background:#fff;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,.35),0 1px 10px 0 rgba(0,0,0,.12);margin:0 auto;max-width:540px;min-width:0;padding:0;width:100%;";
     const fallbackAnchor = document.createElement("a");
     fallbackAnchor.href = permalink;
@@ -486,20 +481,34 @@ const CONFIG = {
     fallbackAnchor.textContent = "View this post on Instagram";
     fallbackAnchor.style.cssText = "display:block;padding:28px 10px;color:#8c4b18;text-decoration:none;font:14px Arial,sans-serif;";
     blockquote.appendChild(fallbackAnchor);
-    $("#instagram-embed-host").replaceChildren(blockquote);
+    instagramHost.replaceChildren(blockquote);
 
     try {
       await loadInstagramScript();
       if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
-      instagramLoaded = true;
-      instagramLoadButton.textContent = "INSTAGRAM POST LOADED";
-      instagramStatus.textContent = "If the preview does not appear, use OPEN ON INSTAGRAM. The post must be public and allow embeds.";
+      instagramIntro.textContent = "A moment from our Instagram";
+      instagramStatus.textContent = "To comment or join the conversation, open the post on Instagram.";
     } catch (_) {
-      instagramLoadButton.disabled = false;
-      instagramLoadButton.textContent = "RETRY INSTAGRAM POST";
-      instagramStatus.textContent = "Instagram could not load the embed here. Use OPEN ON INSTAGRAM to view the post directly.";
+      instagramLoaded = false;
+      instagramIntro.textContent = "The Instagram preview could not load automatically.";
+      instagramStatus.textContent = "Please use VIEW / COMMENT ON INSTAGRAM to see the post and comment there.";
     }
-  });
+  }
+
+  if (permalink) {
+    const instagramSection = $("#instagram-section");
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect();
+          loadInstagramPost();
+        }
+      }, { rootMargin: "300px 0px" });
+      observer.observe(instagramSection);
+    } else {
+      loadInstagramPost();
+    }
+  }
 
   /* Map: visible text uses textContent; map query is URI-encoded and links are HTTPS. */
   $("#venue-name").textContent = CONFIG.venueName;
@@ -508,8 +517,7 @@ const CONFIG = {
   const mapHost = candidateMapUrl ? candidateMapUrl.hostname.toLowerCase() : "";
   const allowedMapHost = mapHost === "google.com" || mapHost.endsWith(".google.com") || mapHost === "maps.app.goo.gl" || mapHost === "goo.gl";
   $("#map-link").href = candidateMapUrl && allowedMapHost ? candidateMapUrl.href : "https://maps.google.com/";
-  const query = encodeURIComponent(CONFIG.mapQuery || CONFIG.venueAddress || CONFIG.venueName);
-  $("#map-embed-frame").src = "https://maps.google.com/maps?q=" + query + "&output=embed";
+  /* Keep the supplied venue-specific Google Maps embed URL in the iframe. */
 
   function createPetals() {
     const host = $("#invitation");
