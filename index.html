@@ -158,6 +158,7 @@
         <p>Two hearts, two families, one beautiful beginning.</p>
         <img class="ornament" src="assets/gold-lotus-divider.webp" alt="" aria-hidden="true" loading="lazy">
         <p class="subtle explore-copy">Scroll down to discover the date, countdown, Instagram moment and venue.</p>
+        <button class="gold-button secondary-button" id="explore-invitation" type="button">EXPLORE THE INVITATION ↓</button>
         <div style="font-size:22px;color:#a96c25;margin-top:8px" aria-hidden="true">⌄</div>
       </div>
     </section>
@@ -200,7 +201,6 @@
         <div class="timebox"><div class="time-number" id="minutes">--</div><div class="time-unit">MINUTES</div></div>
         <div class="timebox"><div class="time-number" id="seconds">--</div><div class="time-unit">SECONDS</div></div>
       </div>
-      <p id="countdown-note" class="subtle">Countdown calculated against the wedding time in IST.</p>
     </section>
 
     <!-- Instagram replaces the former local photo gallery. Set CONFIG.instagramPostUrl below. -->
@@ -382,6 +382,9 @@ const CONFIG = {
     initScratchWhenVisible();
     startCountdown();
     createPetals();
+    // Load the Instagram embed as soon as the invitation opens, not only when
+    // the guest scrolls near that section (which can fail with hidden sections).
+    loadInstagramPost();
   }
 
   function playIntro() {
@@ -607,20 +610,9 @@ const CONFIG = {
     }
   }
 
-  if (permalink) {
-    const instagramSection = $("#instagram-section");
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          observer.disconnect();
-          loadInstagramPost();
-        }
-      }, { rootMargin: "300px 0px" });
-      observer.observe(instagramSection);
-    } else {
-      loadInstagramPost();
-    }
-  }
+  // The embed is triggered by showInvitation() after the invitation is visible.
+  // This avoids relying on IntersectionObserver for a section initially inside
+  // a hidden invitation container.
 
   /* Map: visible text uses textContent; map query is URI-encoded and links are HTTPS. */
   $("#venue-name").textContent = CONFIG.venueName;
